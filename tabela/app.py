@@ -1,8 +1,10 @@
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
 import tabela.database as database
 import tabela.commands as commands
 import tabela.resources as resources
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+
 
 app = Flask(__name__)
 
