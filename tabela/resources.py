@@ -1,5 +1,7 @@
-from tabela.model import Element
+from flask import jsonify
 import unicodedata
+
+from tabela.model import Element
 
 
 def init_app(app):
@@ -9,14 +11,16 @@ def init_app(app):
         if len(elemento) == 0:
             return "Não encontrado", 404
         elemento = elemento[0]
-        return f"{elemento.symbol}: {elemento.name}, n = {elemento.atomic_number}"
+        return jsonify(simbolo=elemento.symbol,
+                nome=elemento.name,
+                numero_atomico = elemento.atomic_number)
 
     @app.route("/elemento/<nome>")
     def nome_elemento(nome: str):
 
         if len(nome) < 3:
             nome = nome.capitalize()
-            elemento = Element.query.filter_by(element_symbol=nome).all()
+            elemento = Element.query.filter_by(symbol=nome).all()
         else:
             nome = (
                 unicodedata.normalize("NFD", nome)
@@ -29,4 +33,6 @@ def init_app(app):
         if len(elemento) == 0:
             return "Não encontrado", 404
         elemento = elemento[0]
-        return f"{elemento.symbol}: {elemento.name}, n = {elemento.atomic_number}"
+        return jsonify(simbolo=elemento.symbol,
+                nome=elemento.name,
+                numero_atomico = elemento.atomic_number)
