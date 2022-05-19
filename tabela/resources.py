@@ -1,7 +1,6 @@
 from flask import jsonify
-import unicodedata
-
 from tabela.model import Element
+import unicodedata
 
 
 def init_app(app):
