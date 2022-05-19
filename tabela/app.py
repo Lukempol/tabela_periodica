@@ -4,14 +4,11 @@ from flask_sqlalchemy import SQLAlchemy
 import tabela.database as database
 import tabela.commands as commands
 import tabela.resources as resources
-
+import tabela.config as config
 
 app = Flask(__name__)
 
-app.config[
-    "SQLALCHEMY_DATABASE_URI"
-] = "postgresql+psycopg2://postgres:123@localhost:5432/periodic"
-# app.config['DEVELOPMENT'] = True
+config.init_app(app)
 database.init_app(app)
 commands.init_app(app)
 resources.init_app(app)
